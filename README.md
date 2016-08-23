@@ -1,53 +1,53 @@
 # NHFRadioButton
 <h2>介绍</h2>
-<p>针对本地普通数据的缓存：基本数据类型、NSDictory、NSArray等</p>
+<p>这是一个自由度非常大的单选框按钮组件</p>
 <h2>安装</h2>
 <ul>
-<li>pod 'NhfCacheDeal'</li>
+<li>pod 'NHFRadioButton'</li>
 <li>手动下载然后将文件夹拖至工程中即可</li>
 </ul>
 <h2>使用方法</h2>
-/**
- *功能：测试是否记录了某个键
- *@param key键名
- *return true时为登记了，false为没有登记
- */</br>
--(BOOL)isRegisterKey:(NSString*)key;
-
-/**
- *功能：保存字符串数据
- *@param stringdata字符串数据
- *@param key键数据
- */</br>
--(void)saveStringValue:(NSString*)stringdata key:(NSString*)key;
-
-/**
- *功能：获取指定键值
- *@param key键名
- */
--(id)getStringKey:(NSString*)key;
-
-/**
- *功能：删除指定键值
- *@param key键名
- */</br>
--(void)removeDataKey:(NSString*)key;
-
-/**
- *功能：保存对象到缓存中去
- *@param object对象
- *@param key键名
- */</br>
--(void)saveObject:(id)object key:(NSString*)key;
-
-/**
- *功能：获取指定键的对象
- *@param key指定键名
- *@return 返回对象
- */</br>
--(id)getObject:(NSString*)key;
-</br>
-+ (NSArray *)getArrayByCacheKey:(NSString *)cacheKey sp:(NSString *)sp;
-</br>
-+ (void)saveArrayByCacheKey:(NSString *)cacheKey objects:(NSArray *)objects sp:(NSString *)sp;
+        CGFloat everyHeight = 40.f;//每行的高度
+        CGFloat everyLineBoth = 10.f;//行与行间的间距
+        CGFlost bothSides = 15.f;//左边的视图与右边视图的间距（左边选择图片与后边的视图的间距）
+        _nhfRadioButton = [[NHFRadioButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleLabel.frame), [DeviceInfo ScreenSize].width, (everyHeight+everyLineBoth)*2+everyLineBoth)
+                                             NHFRadioButtonType:NHFRadioButtonTypeOnlyOneSelect
+                                                  everyLineBoth:everyLineBoth
+                                                      bothSides:bothSides
+                                        buttonWithRightViewBoth:10.f
+                                           NHFRadioButtonAction:^(NSInteger item) {
+                                           //这里回调选择的某行
+                                               selectItem = item;
+        }];
+        [self addSubview:_nhfRadioButton];
+        _nhfRadioButton.selectIco = [UIImage imageNamed:@"only_unselect_ico"];
+        _nhfRadioButton.unSelectIcos = [UIImage imageNamed:@"only_select_ico"];
+        NSMutableArray *rightViews = [NSMutableArray new];
+        
+        //微信
+        UIView *wxView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [DeviceInfo ScreenSize].width-100, everyHeight)];
+        [wxView setUserInteractionEnabled:false];
+        [rightViews addObject:wxView];
+        UIImageView *wxImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, everyHeight, everyHeight)];
+        [wxImageView setImage:[UIImage imageWithContentsOfFile:[DeviceInfo AppBaseResourcePath:@"weixin_pay_ico.png"]]];
+        [wxView addSubview:wxImageView];
+        UILabel *wxLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(jinheImageView.frame)+MARGIN/2, 0, 100, everyHeight)];
+        [wxLabel setFont:[UIFont fontByName:nil fontSize:16]];
+        [wxLabel setText:@"微信支付"];
+        [wxView addSubview:wxLabel];
+        
+        //支付宝
+        UIView *zfbView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [DeviceInfo ScreenSize].width-100, everyHeight)];
+        [zfbView setUserInteractionEnabled:false];
+        [rightViews addObject:zfbView];
+        UIImageView *zfbImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, everyHeight, everyHeight)];
+        [zfbImageView setImage:[UIImage imageWithContentsOfFile:[DeviceInfo AppBaseResourcePath:@"zhifubao_pay_ico.png"]]];
+        [zfbView addSubview:zfbImageView];
+        UILabel *zfbLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(jinheImageView.frame)+MARGIN/2, 0, 100, everyHeight)];
+        [zfbLabel setFont:[UIFont fontByName:nil fontSize:16]];
+        [zfbLabel setText:@"微信支付"];
+        [zfbView addSubview:zfbLabel];
+        
+        _nhfRadioButton.rightViews = rightViews;
+        [_nhfRadioButton updateView];
 
