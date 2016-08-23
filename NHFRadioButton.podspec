@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "NHFRadioButton"
-  s.version          = "0.0.1"
+  s.version          = "1.0.1"
   s.summary          = "这是一个自由度非常大的单选框按钮组件"
   s.homepage         = "https://github.com/nhfc99/NHFRadioButton"  
   s.license          = 'MIT'
