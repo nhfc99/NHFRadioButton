@@ -73,6 +73,7 @@
             [button addSubview:view];
             
             [self addSubview:button];
+            [_allButtons addObject:button];
         }
     }
 }
@@ -149,6 +150,31 @@
             
         default:
             break;
+    }
+}
+
+- (void)clickSelectByItem:(NSInteger)item {
+    id button = [self viewWithTag:(item+NHFRadioButtonBaseTag)];
+    if (button != nil &&
+        [[button class] isSubclassOfClass:[UIButton class]]) {
+        [self clickButtonEvent:(UIButton *)button];
+    }
+}
+
+- (void)setOnlyOneEnableByItem:(NSInteger)item {
+    for (UIButton *button in _allButtons) {
+        [button setEnabled:false];
+    }
+    id button = [self viewWithTag:(item+NHFRadioButtonBaseTag)];
+    if (button != nil &&
+        [[button class] isSubclassOfClass:[UIButton class]]) {
+        [((UIButton *)button) setEnabled:false];
+    }
+}
+
+- (void)setAllEnableByItem {
+    for (UIButton *button in _allButtons) {
+        [button setEnabled:true];
     }
 }
 

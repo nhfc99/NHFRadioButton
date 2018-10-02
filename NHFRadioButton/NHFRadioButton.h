@@ -61,6 +61,25 @@ typedef void(^NHFRadioButtonAction)(NSInteger item);
  */
 - (void)setSelectItem:(NSInteger)item;
 
+/**
+ 选择某个选项
+
+ @param item
+ */
+- (void)clickSelectByItem:(NSInteger)item;
+
+/**
+ 设置某个选项可以选择
+
+ @param item
+ */
+- (void)setOnlyOneEnableByItem:(NSInteger)item;
+
+/**
+ 设置所有的选项可以选择
+ */
+- (void)setAllEnableByItem;
+
 @end
 
 
